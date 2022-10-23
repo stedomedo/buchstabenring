@@ -5,6 +5,7 @@ a puzzle by Süddeutschen Zeitung.
 
 Here are the rules (translated from the website):
 
+- Create words with the given ring of letters.
 - Words must consist of at least 4 letters.
 - Letters can be used multiple times, however, the previously used letter and its neighbors in the ring are prohibited.
 - The next word starts with the same letter as the previous one ends.
@@ -17,13 +18,16 @@ This solver treats the puzzle similarly to a search problem.
 A vocabulary is filtered by letter-bigrams that serve as some kind of index to extract candidate words
 that can be created within the ring.
 Those candidates are then combined and checked for the remaining rules by the puzzle.
+Multiple puzzles can be solved in one run to save on loading time for the vocabulary.
 
 
 ### Solution with simple vocabulary
 
 If you have a German vocabulary file at hand, this one is quick and simple.
 I used a parsed ispell dictionary, which is pretty old but serves the purpose.
-Plural forms or conjugated verbs may be in the list of solutions and you will need to filter out those manually.
+Not all published puzzles can be solved with this vocabular,
+so if you have a newer/better one that'll be perfect.
+Also, plural forms or conjugated verbs may be in the list of solutions and you will need to filter out those manually.
 
 ```
 usage: buchstabenring.py [-h] [-w FILE] STR [STR ...]
@@ -48,7 +52,7 @@ python3 buchstabenring.py -w ngerman purlifäbenmg hilckpotnras msbuktnoficl tny
 
 In case you don't have a vocabulary file at hand, you can create one from large texts.
 Count the word frequencies which will help later with filtering out rare, nonsense or misspelled words.
-The algorithm is the same as above but in addition by lemmatized from (using `spacy`)
+The algorithm is the same as above but in addition filters by lemmatized from (using `spacy`)
 and word frequencies are used to sort and return top n results instead of all.
 
 ```
