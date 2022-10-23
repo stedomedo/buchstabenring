@@ -52,7 +52,13 @@ python3 buchstabenring.py -w ngerman purlifäbenmg hilckpotnras msbuktnoficl tny
 
 In case you don't have a vocabulary file at hand, you can create one from large texts.
 Count the word frequencies which will help later with filtering out rare, nonsense or misspelled words.
-The algorithm is the same as above but in addition filters by lemmatized from (using `spacy`)
+(A simple approach to do this is on the command-line:
+```
+cat my_large_text | tr " " "\n" | sort | uniq -c | awk '{print $2, $1}'
+```
+)
+
+The algorithm of the solver is the same as above but in addition it filters by lemmatized form (using `spacy`)
 and word frequencies are used to sort and return top n results instead of all.
 
 ```
