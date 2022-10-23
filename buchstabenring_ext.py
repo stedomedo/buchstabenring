@@ -18,7 +18,7 @@ def candidates(vocab, letters, bigrams, nlp):
                 # analyze word with spacy
                 word_analyzed = nlp(word)
                 if len(word_analyzed) > 0:
-                    # use lemmatized word to get rid of conjugated verbs, plural nouns, etc.
+                    # check if word is lemma to get rid of conjugated verbs, plural nouns, etc.
                     if word == word_analyzed[0].lemma_:
                         cands.add(word)
     return list(cands)
